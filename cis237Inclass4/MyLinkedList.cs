@@ -38,13 +38,14 @@ namespace cis237Inclass4
         /* REMOVE A NODE FROM THE LIST */   // This is base 1, not base 0.
         public bool Delete(int position)
         {
+            current = Head;                 // Set the current position we're working on to the first one in the list.
 
             /* Delete the first node. */
             if (position == 1)              // If the position is the very first node in the list (we want to delete the first one in the list)
             {
-                Head = current.Next;            // Set the head to the next one (position 2) in the list
-                current = null;                 // 
-                return true;
+                Head = current.Next;            // Set the head to the next position (position 2) in the list
+                current = null;                 // Set the current position to nothing
+                return true;                    // Successfully deleted
             }
 
             /* Delete a node other than the first. */
@@ -64,6 +65,9 @@ namespace cis237Inclass4
                         // Set the last node's Next node to the TempNode's Next node.
                         lastNode.Next = temporaryNode.Next;
 
+                        // The temporary node's Next node now references nothing.
+                        temporaryNode.Next = null;
+
                         // We found the node.
                         return true;
                     }
@@ -79,6 +83,7 @@ namespace cis237Inclass4
                 }
             }
 
+            // temporaryNode hit null, so we didn't delete anything (we couldn't find the node with that position)
             return false;
         }
 
